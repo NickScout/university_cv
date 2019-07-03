@@ -23,8 +23,8 @@ public class Lector {
     @ManyToMany
     @JoinTable(
             name = "departments_lectors",
-            joinColumns = @JoinColumn(name = "lector_id"),
-            inverseJoinColumns = @JoinColumn(name = "department_id")
+            joinColumns = @JoinColumn(name = "lector_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id")
     )
     @Setter(AccessLevel.NONE)
     private Set<Department> departments;

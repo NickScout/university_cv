@@ -1,6 +1,7 @@
 package com.nickscout.university.model;
 
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,8 +24,8 @@ public class Department implements DepartmentInterface {
     @ManyToMany
     @JoinTable(
             name = "departments_lectors",
-            joinColumns = @JoinColumn(name = "department_id"),
-            inverseJoinColumns = @JoinColumn(name = "lector_id")
+            joinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "lector_id", referencedColumnName = "id")
     )
     @Setter(AccessLevel.NONE)
     private Set<Lector> lectors;

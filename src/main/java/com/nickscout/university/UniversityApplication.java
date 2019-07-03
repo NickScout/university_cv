@@ -32,15 +32,10 @@ public class UniversityApplication {
 		lectorRepository.save(ns);
 		Department ami = new Department();
 		ami.setHead(ns);
-		ami.setName("applied mathematics and informatics");
+		ami.setName("ami");
 		ami.getLectors().add(ns);
 		departmentRepoository.save(ami);
-
-		try {
-			c.showSearchResult("applied mathematics and informatics");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		c.start();
 	}
 
 

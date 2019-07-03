@@ -4,7 +4,7 @@ import com.nickscout.university.model.Department;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ConsoleController {
-    @Transactional
+
     void showHead (Department department);
     @Transactional
     void showStatistics (Department department);
