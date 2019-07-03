@@ -1,8 +1,9 @@
 package com.nickscout.university.model;
 
+import lombok.Data;
+import javax.persistence.Entity;
 
-public enum  Degree {
-    ASSISTANT,
-    ASSOCIATE_PROFESSOR,
-    PROFESSOR
+@Entity
+@Data
+public class Degree {
 }
