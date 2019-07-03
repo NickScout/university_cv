@@ -1,13 +1,15 @@
 package com.nickscout.university.repository;
 
 import com.nickscout.university.model.Department;
-import com.nickscout.university.model.Lector;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import java.util.Set;
 
 @Repository
 public interface DepartmentRepoository extends JpaRepository<Department, Long> {
-    @Query("select d.head from Department d where d = ?1")
-    Lector getHeadOfDepartment(Department department);
+
+    @Query(value = "select d from Department d where locate(?1, d.name) > 0")
+    Set<Department> findDepartmentsByPartialName(String name);
+
 }

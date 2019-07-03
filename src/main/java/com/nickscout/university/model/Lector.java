@@ -8,12 +8,12 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter
 public class Lector {
     @Column(unique = true)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Setter(AccessLevel.PRIVATE)
+    @Setter(AccessLevel.NONE)
     private long id;
     private String firstName;
     private String secondName;
@@ -26,6 +26,7 @@ public class Lector {
             joinColumns = @JoinColumn(name = "lector_id"),
             inverseJoinColumns = @JoinColumn(name = "department_id")
     )
+    @Setter(AccessLevel.NONE)
     private Set<Department> departments;
 
     public Lector() {
@@ -43,5 +44,10 @@ public class Lector {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("lector %s %s", firstName, secondName);
     }
 }

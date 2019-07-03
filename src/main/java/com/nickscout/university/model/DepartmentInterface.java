@@ -8,4 +8,5 @@ public interface DepartmentInterface {
     Set<Lector> getAllLectorsByDegree(Degree degree);
     double getAverageSalary();
     int countLectors();
+    int countLectorsByDegree(Degree degree);
 }

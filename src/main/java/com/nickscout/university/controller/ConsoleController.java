@@ -1,17 +1,18 @@
 package com.nickscout.university.controller;
 
 import com.nickscout.university.model.Department;
-import com.nickscout.university.model.Lector;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface ConsoleController {
+    @Transactional
     void showHead (Department department);
-
+    @Transactional
     void showStatistics (Department department);
-
-    void showAverageSalary (Department department);
-
-    void showEmployeeCount(Department department);
-
+    @Transactional
+    void showAverageSalary(Department department);
+    @Transactional
+    void showLectorsCount(Department department);
+    @Transactional
     void showSearchResult(String query);
 
 }

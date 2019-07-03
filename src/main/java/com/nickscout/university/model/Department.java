@@ -9,15 +9,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter
 public class Department implements DepartmentInterface {
 
     @Column(unique = true)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Setter(AccessLevel.PRIVATE)
+    @Setter(AccessLevel.NONE)
     private long id;
-
+    private String name;
     @OneToOne
     private Lector head;
     @ManyToMany
@@ -26,6 +26,7 @@ public class Department implements DepartmentInterface {
             joinColumns = @JoinColumn(name = "department_id"),
             inverseJoinColumns = @JoinColumn(name = "lector_id")
     )
+    @Setter(AccessLevel.NONE)
     private Set<Lector> lectors;
 
     public Department() {
@@ -64,6 +65,13 @@ public class Department implements DepartmentInterface {
     }
 
     @Override
+    public int countLectorsByDegree(Degree degree) {
+        return (int) lectors.stream()
+                .filter(lector -> lector.getDegree() == degree)
+                .count();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -74,5 +82,10 @@ public class Department implements DepartmentInterface {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("department of %s", name);
     }
 }
