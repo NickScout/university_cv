@@ -60,9 +60,10 @@ public class Console implements ConsoleController {
 
     @Override
     public void showSearchResult(String query) {
-        Collection<Department> departments = departmentRepoository.findDepartmentsByPartialName(query);
-        System.out.println(departments.size());
+        Set<Department> departments = departmentRepoository.findDepartmentsByPartialName(query);
         departments.forEach(department -> logger.info(department.toString()));
+        Set<Lector> lectors = lectorRepository.findLectorsByPartialName(query);
+        lectors.forEach(lector -> logger.info(lector.toString()));
     }
 
 
