@@ -1,15 +1,16 @@
 package com.nickscout.university.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
-@Data
-public class Department {
+@Getter @Setter @ToString
+public class Department implements DepartmentInterface {
 
     @Column(unique = true)
     @Id
@@ -20,7 +21,58 @@ public class Department {
     @OneToOne
     private Lector head;
     @ManyToMany
-    @JoinTable(name = "departments_lectors")
+    @JoinTable(
+            name = "departments_lectors",
+            joinColumns = @JoinColumn(name = "department_id"),
+            inverseJoinColumns = @JoinColumn(name = "lector_id")
+    )
     private Set<Lector> lectors;
 
+    public Department() {
+        lectors = new HashSet<>();
+    }
+
+    @Override
+    public Lector getHead() {
+        return head;
+    }
+
+    @Override
+    public Set<Lector> getAllLectors() {
+        return lectors;
+    }
+
+    @Override
+    public Set<Lector> getAllLectorsByDegree(Degree degree) {
+        return lectors.stream()
+                .filter(lector -> lector.getDegree() == degree)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public double getAverageSalary() {
+
+        return lectors.stream()
+                .mapToDouble(lector -> lector.getSalary())
+                .average()
+                .getAsDouble();
+    }
+
+    @Override
+    public int countLectors() {
+        return lectors.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

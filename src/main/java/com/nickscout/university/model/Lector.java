@@ -1,14 +1,14 @@
 package com.nickscout.university.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter @Setter @ToString
 public class Lector {
     @Column(unique = true)
     @Id
@@ -21,7 +21,27 @@ public class Lector {
     @Enumerated(EnumType.STRING)
     private Degree degree;
     @ManyToMany
-    @JoinTable(name = "departments_lectors")
+    @JoinTable(
+            name = "departments_lectors",
+            joinColumns = @JoinColumn(name = "lector_id"),
+            inverseJoinColumns = @JoinColumn(name = "department_id")
+    )
     private Set<Department> departments;
 
+    public Lector() {
+        departments = new HashSet<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lector lector = (Lector) o;
+        return id == lector.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
