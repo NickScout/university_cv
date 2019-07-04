@@ -27,12 +27,15 @@ public class Console implements ConsoleController {
 
     @Override
     public void showHead(Department department) {
+        if (department == null) throw new IllegalArgumentException();
         Lector head = department.getHead();
+        if (head == null) throw new IllegalArgumentException();
         logger.info(String.format("Head of %s department is %s", department.toString(), head.toString()));
     }
 
     @Override
     public void showStatistics(Department department) {
+        if (department == null) throw new IllegalArgumentException();
 
         int assistantsCount = department.countLectorsByDegree(Degree.ASSISTANT);
         int professorsCount = department.countLectorsByDegree(Degree.PROFESSOR);
@@ -48,12 +51,14 @@ public class Console implements ConsoleController {
 
     @Override
     public void showAverageSalary(Department department) {
+        if (department == null) throw new IllegalArgumentException();
         double salary = department.getAverageSalary();
         logger.info(String.format("The average salary of %s is %f", department.toString(), salary));
     }
 
     @Override
     public void showLectorsCount(Department department) {
+        if (department == null) throw new IllegalArgumentException();
         int count = department.countLectors();
         logger.info(count);
     }

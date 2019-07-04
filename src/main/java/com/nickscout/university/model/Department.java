@@ -1,8 +1,6 @@
 package com.nickscout.university.model;
 
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,8 +12,7 @@ import java.util.stream.Collectors;
 public class Department implements DepartmentInterface {
 
     @Column(unique = true)
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     private long id;
     private String name;
