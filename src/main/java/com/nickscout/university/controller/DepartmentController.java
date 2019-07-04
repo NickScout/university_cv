@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -36,6 +38,16 @@ public class DepartmentController {
         if (department != null) {
             departmentRepoository.save(department);
             return new ResponseEntity<>(department, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @PostMapping (value = "/department/")
+    public ResponseEntity<Collection<Department>> postAllDepartments(@RequestBody Collection<Department> departments) {
+        if (departments != null) {
+            departmentRepoository.saveAll(departments);
+            return new ResponseEntity<>(departments, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }

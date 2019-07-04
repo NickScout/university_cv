@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,11 +43,19 @@ public class LectorController {
         }
     }
 
+    @PostMapping (value = "/lector/")
+    public ResponseEntity<Collection<Lector>> postAllLectors(@RequestBody Collection<Lector> lectors) {
+        if (lectors != null) {
+            lectorRepository.saveAll(lectors);
+            return new ResponseEntity<>(lectors, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
     @DeleteMapping (value = "/lector/")
     public ResponseEntity<Lector> deleteLector(@PathVariable long id) {
         lectorRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }
