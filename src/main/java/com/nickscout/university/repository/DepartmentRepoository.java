@@ -15,6 +15,6 @@ public interface DepartmentRepoository extends JpaRepository<Department, Long> {
     @Query(value = "select d from Department d where locate(?1, d.name) > 0")
     Set<Department> findDepartmentsByPartialName(String name);
     
-    Department findDepartmentByName(String name);
+    Optional<Department> findDepartmentByName(String name);
 
 }

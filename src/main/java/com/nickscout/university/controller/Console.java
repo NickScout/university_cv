@@ -39,7 +39,7 @@ public class Console implements ConsoleController {
         int associateProfessorsCount = department.countLectorsByDegree(Degree.ASSOCIATE_PROFESSOR);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("assistans - ").append(assistantsCount).append(".\n")
+        sb.append("\nassistans - ").append(assistantsCount).append(".\n")
                 .append("associate professors - ").append(associateProfessorsCount).append(".\n")
                 .append("professors - ").append(professorsCount).append(".\n");
 
@@ -80,37 +80,42 @@ public class Console implements ConsoleController {
             key = scanner.nextInt();
             scanner.nextLine();
             String departmentName;
-            Department department;
+            Optional<Department> department;
             switch (key) {
                 case 1:
+                    System.out.println("Enter {department_name} : ");
                     departmentName = scanner.nextLine();
                     department = departmentRepoository.findDepartmentByName(departmentName);
-                    if (department != null) {
-                        showHead(department);
+                    if (department.isPresent()) {
+                        showHead(department.get());
                     }
                     break;
                 case 2:
+                    System.out.println("Enter {department_name} : ");
                     departmentName = scanner.nextLine();
                     department = departmentRepoository.findDepartmentByName(departmentName);
-                    if (department != null) {
-                        showStatistics(department);
+                    if (department.isPresent()) {
+                        showStatistics(department.get());
                     }
                     break;
                 case 3:
+                    System.out.println("Enter {department_name} : ");
                     departmentName = scanner.nextLine();
                     department = departmentRepoository.findDepartmentByName(departmentName);
-                    if (department != null) {
-                        showAverageSalary(department);
+                    if (department.isPresent()) {
+                        showAverageSalary(department.get());
                     }
                     break;
                 case 4:
+                    System.out.println("Enter {department_name} : ");
                     departmentName = scanner.nextLine();
                     department = departmentRepoository.findDepartmentByName(departmentName);
-                    if (department != null) {
-                        showLectorsCount(department);
+                    if (department.isPresent()) {
+                        showLectorsCount(department.get());
                     }
                     break;
                 case 5:
+                    System.out.println("Enter query: ");
                     String query = scanner.nextLine();
                     showSearchResult(query);
                     break;
