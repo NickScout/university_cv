@@ -37,6 +37,7 @@ public class UniversityApplication {
 		ami.getLectors().add(ns);
 		departmentRepoository.save(ami);
 		c.start();
+
 	}
 
 
