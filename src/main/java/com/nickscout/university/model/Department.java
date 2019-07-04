@@ -12,8 +12,7 @@ import java.util.stream.Collectors;
 public class Department implements DepartmentInterface {
 
     @Column(unique = true)
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     private long id;
     private String name;
