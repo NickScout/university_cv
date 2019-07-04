@@ -1,5 +1,6 @@
 package com.nickscout.university.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Lector {
     private double salary;
     @Enumerated(EnumType.STRING)
     private Degree degree;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "departments_lectors",

@@ -17,4 +17,8 @@ public interface DepartmentRepoository extends JpaRepository<Department, Long> {
     
     Optional<Department> findDepartmentByName(String name);
 
+    @Query(value = "SELECT * FROM department d LIMIT ?1",
+    nativeQuery = true)
+    Set<Department> findAllWithLimit(int limit);
+
 }

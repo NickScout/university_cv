@@ -1,4 +1,4 @@
-package com.nickscout.university.controller;
+package com.nickscout.university.view;
 
 import com.nickscout.university.model.Department;
 import org.springframework.transaction.annotation.Transactional;
