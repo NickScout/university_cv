@@ -1,17 +1,21 @@
 package com.nickscout.university;
 
 import com.nickscout.university.view.Console;
-import com.nickscout.university.model.Degree;
-import com.nickscout.university.model.Department;
-import com.nickscout.university.model.Lector;
 import com.nickscout.university.repository.DepartmentRepoository;
 import com.nickscout.university.repository.LectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+import java.io.*;
+import java.util.Properties;
+
 
 @SpringBootApplication (exclude = SecurityAutoConfiguration.class)
 public class UniversityApplication {
@@ -25,17 +29,8 @@ public class UniversityApplication {
 	@Autowired Console c;
 	@PostConstruct
 	public void onStart() {
-		Lector ns = new Lector();
-		ns.setFirstName("Nick");
-		ns.setSecondName("Scout");
-		ns.setSalary(999999);
-		ns.setDegree(Degree.PROFESSOR);
-		lectorRepository.save(ns);
-		Department ami = new Department();
-		ami.setHead(ns);
-		ami.setName("ami");
-		ami.getLectors().add(ns);
-		departmentRepoository.save(ami);
+
+
 		c.start();
 
 	}
